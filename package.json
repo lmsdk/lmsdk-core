@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/lmsdk/lmsdk-core#readme",
   "dependencies":{
-    "web3":"1.0.0-bata2",
-    "lmsdk-eth-providers":"1.0.0-dev1"
+    "web3":"^1.2.0"
   }
 }

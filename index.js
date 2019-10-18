@@ -1,5 +1,5 @@
 const url = require('url');
-const lmsdk_eth_providers = require('lmsdk-eth-providers');
+const lmsdk_eth_providers = require('../lmsdk-eth-providers');
 const Web3 = require('web3');
 
 var localURL = url.parse(location.href, true);
