@@ -1,0 +1,26 @@
+{
+  "name": "lmsdk-core",
+  "version": "1.0.0-dev1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmsdk/lmsdk-core.git"
+  },
+  "keywords": [
+    "lmsdk-core"
+  ],
+  "author": "oblivioned",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmsdk/lmsdk-core/issues"
+  },
+  "homepage": "https://github.com/lmsdk/lmsdk-core#readme",
+  "dependencies":{
+    "web3":"1.0.0-bata2",
+    "lmsdk-eth-providers":"1.0.0-dev1"
+  }
+}
