@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/lmsdk/lmsdk-core#readme",
   "dependencies":{
-    "web3":"^1.2.0"
+    "web3":"1.2.0"
   }
 }
