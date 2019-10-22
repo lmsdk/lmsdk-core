@@ -1,33 +1,236 @@
 <template>
-    <view style="normal">
-    </view>
+	<view class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
+		<uni-status-bar v-if="insertStatusBar"></uni-status-bar>
+		<view class="uni-navbar-header" :style="{color:color}">
+			<view class="uni-navbar-header-btns" @tap="onClickLeft">
+				<view v-if="leftIcon.length">
+					<uni-icon :style="{'font-weight': leftWeight}" :type="leftIcon" :color="color" :size="leftSize"></uni-icon>
+				</view>
+				<view v-if="leftText.length" class="uni-navbar-btn-text" :class="{'uni-navbar-btn-icon-left':!leftIcon.length}">{{leftText}}</view>
+				<slot name="left"></slot>
+			</view>
+			<view class="uni-navbar-container">
+				<view v-if="title.length" class="uni-navbar-container-title">{{title}}</view>
+				<!-- 标题插槽 -->
+				<slot></slot>
+			</view>
+			<view class="uni-navbar-header-btns" @tap="onClickRight">
+                <view v-if="rightIcon.length">
+                    <uni-icon :style="{'font-weight': rightWeight}" :type="rightIcon" :color="color" :size="rightSize"></uni-icon>
+                </view>
+                <!-- 优先显示图标 -->
+                <view v-if="rightText.length&&!rightIcon.length" class="uni-navbar-btn-text">{{rightText}}</view>
+                <slot name="right"></slot>
+            </view>
+		</view>
+	</view>
 </template>
 
 <script>
-
-    // <lm-navigationbar text="Title" left="icon back" right="icon message"></lm-navigationbar>
+    
     const lmsdk_core_navigationBar = require('./lmnavigationbar.js');
 
     export default {
-        props: {
-            style: String,
-            text: String,
-            left: String,
-            right: String,
-            backgroud: String
+        components: {
+            // uniIcon
         },
-        onShow() {
-
-            var navigationBar = new lmsdk_core_navigationBar();
-
-            if ( !this.style || this.style.length <= 0 ) {
-                this.style = "normal";
+        props: {
+            /**
+             * 标题文字
+             */
+            title: {
+                type: String,
+                default: ''
+            },
+            /**
+             * 左侧按钮文本
+             */
+            leftText: {
+                type: String,
+                default: ''
+            },
+            /**
+             * 右侧按钮文本
+             */
+            rightText: {
+                type: String,
+                default: ''
+            },
+            /**
+             * 左侧按钮图标
+             */
+            leftIcon: {
+                type: String,
+                default: ''
+            },
+            /**
+             * 右侧按钮图标
+             */
+            rightIcon: {
+                type: String,
+                default: ''
+            },
+            /**
+             * 是否固定在顶部
+             */
+            fixed: {
+                type: [Boolean, String],
+                default: false
+            },
+            /**
+             * 按钮图标和文字颜色
+             */
+            color: {
+                type: String,
+                default: '#000000'
+            },
+            /**
+             * 背景颜色
+             */
+            backgroundColor: {
+                type: String,
+                default: '#FFFFFF'
+            },
+            /**
+             * 是否包含状态栏，默认固定在顶部时包含
+             */
+            statusBar: {
+                type: [Boolean, String],
+                default: ''
+            },
+            /**
+             * 是否使用阴影，默认根据背景色判断
+             */
+            shadow: {
+                type: String,
+                default: ''
+            },
+			/**
+			 * 左侧图标大小
+			 */
+			leftSize: {
+				type: [Number, String],
+				default: '24'
+			},
+			/**
+			 * 左侧图标样式
+			 */
+			leftWeight: {
+				type: String,
+				default: ''
+			},
+			/**
+			 * 右侧图标大小
+			 */
+			rightSize: {
+				type: [Number, String],
+				default: '24'
+			},
+			/**
+			 * 右侧图标样式
+			 */
+			rightWeight: {
+				type: String,
+				default: ''
+			},
+        },
+        computed: {
+            isFixed() {
+                return String(this.fixed) === 'true'
+            },
+            insertStatusBar() {
+                switch (String(this.statusBar)) {
+                    case 'true':
+                        return true
+                    case 'false':
+                        return false
+                    default:
+                        return this.isFixed
+                }
+            },
+            hasShadow() {
+                var backgroundColor = this.backgroundColor
+                switch (String(this.shadow)) {
+                    case 'true':
+                        return true
+                    case 'false':
+                        return false
+                    default:
+                        return backgroundColor !== 'transparent' && backgroundColor.indexOf('rgba') < 0
+                }
             }
-
-            navigationBar.setNavigationBarStyle(location.href, this.style, this.text, this.left, this.right, this.backgroud);
+        },
+        methods: {
+            /**
+             * 左侧按钮点击事件
+             */
+            onClickLeft() {
+                this.$emit('clickLeft')
+                this.$emit('click-left')
+            },
+            /**
+             * 右侧按钮点击事件
+             */
+            onClickRight() {
+                this.$emit('clickRight')
+                this.$emit('click-right')
+            }
         }
     }
 </script>
 
 <style>
+    .uni-navbar {
+        display: block;
+        position: relative;
+        width: 100vw;
+        background-color: #FFFFFF;
+        overflow: hidden;
+    }
+
+	.uni-navbar view{
+		line-height:44px;
+	}
+
+    .uni-navbar-shadow {
+        box-shadow: 0 1px 6px #ccc;
+    }
+
+    .uni-navbar.uni-navbar-fixed {
+        position: fixed;
+        z-index: 998;
+    }
+
+    .uni-navbar-header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height:44px;
+        line-height:44px;
+        font-size: 16px;
+    }
+
+	.uni-navbar-header .uni-navbar-header-btns{
+		display:inline-flex;
+		flex-wrap:nowrap;
+		flex-shrink:0;
+		width: 120rpx;
+		padding: 0 25rpx;
+		box-sizing: border-box;
+	}
+
+	.uni-navbar-header .uni-navbar-header-btns:last-child {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.uni-navbar-container{
+		width:100%;
+		margin:0 10rpx;
+	}
+	.uni-navbar-container-title{
+		font-size: 37.5rpx;
+		font-weight: bold;
+		text-align: center;
+	}
 </style>
