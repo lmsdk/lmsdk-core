@@ -1,5 +1,5 @@
 <template>
-    <view @click="navigatorTagOnClick">
+    <view @tap="navigatorTagOnClick">
 		<slot></slot>
 	</view>
 </template>
