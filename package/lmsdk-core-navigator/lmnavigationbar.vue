@@ -1,5 +1,5 @@
 <template>
-	<view v-if="lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
+	<view v-if="!lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
 		<uni-status-bar v-if="insertStatusBar"></uni-status-bar>
 		<view class="uni-navbar-header" :style="{color:color}">
 			<view class="uni-navbar-header-btns" @tap="onClickLeft">
@@ -34,7 +34,7 @@
     export default {
 		data() {
 			return {
-				lmAPP: localURL.query._lm !== 'true'
+				lmAPP: localURL.query._lm
 			}
 		},
         components: {
@@ -140,11 +140,25 @@
 				default: ''
 			},
         },
-		// mounted() {
-		// 	if (localURL.query._lm) {
-				
-		// 	}
-		// },
+        created: function() {
+            var _this = this;
+            if ( localURL.query._lm ) {
+                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], url, {
+                    title: _this.title,
+                    leftText: _this.leftText,
+                    rightText: _this.rightText,
+                    leftIcon: _this.leftIcon,
+                    rightIcon: _this.rightIcon,
+                    color: _this.color,
+                    backgroundColor: _this.backgroundColor,
+                    shadow: _this.shadow,
+                    leftSize: _this.leftSize,
+                    leftWeight: _this.leftWeight,
+                    rightSize: _this.rightSize,
+                    rightWeight: _this.rightWeight
+                })
+            }
+        },
         computed: {
             isFixed() {
                 return String(this.fixed) === 'true'

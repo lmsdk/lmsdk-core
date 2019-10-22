@@ -7,11 +7,11 @@ var LMPNavigationBar = function LMPNavigationBar() {
     }
 }
 
-LMPNavigationBar.prototype.setNavigationBarStyle = function(url, style, background, text, left, right ) {
+LMPNavigationBar.prototype.setNavigationBarStyle = function(url, options) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], url, style, backgroud, text, left, right)
+            plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], url, options)
         }
     });
 }
