@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
+	<view v-if="lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
 		<uni-status-bar v-if="insertStatusBar"></uni-status-bar>
 		<view class="uni-navbar-header" :style="{color:color}">
 			<view class="uni-navbar-header-btns" @tap="onClickLeft">
@@ -27,10 +27,16 @@
 </template>
 
 <script>
-
+	const url = require('url');
+	var localURL = url.parse(location.href, true);
     const lmsdk_core_navigationBar = require('./lmnavigationbar.js');
 
     export default {
+		data() {
+			return {
+				lmAPP: localURL.query._lm !== 'true'
+			}
+		},
         components: {
             // uniIcon
         },
@@ -134,6 +140,11 @@
 				default: ''
 			},
         },
+		// mounted() {
+		// 	if (localURL.query._lm) {
+				
+		// 	}
+		// },
         computed: {
             isFixed() {
                 return String(this.fixed) === 'true'
@@ -183,7 +194,7 @@
     .uni-navbar {
         display: block;
         position: relative;
-        width: 100vw;
+        width: 100%;
         background-color: #FFFFFF;
         overflow: hidden;
     }
