@@ -1,5 +1,7 @@
 <template>
-    <view @click="navigatorTagOnClick"></view>
+    <view @click="navigatorTagOnClick">
+		<slot></slot>
+	</view>
 </template>
 
 <script>

@@ -3,7 +3,7 @@ var localURL = url.parse(location.href, true);
 
 var LMPNavigator = function LMPNavigator() {
     if (localURL.query._lm) {
-        this._lm = localURL.query._lm;
+        this._inApp = true
     }
 }
 
@@ -17,7 +17,7 @@ LMPNavigator.prototype.types = {
 LMPNavigator.prototype.push = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
-        if (_this._lm) {
+        if (_this._inApp) {
             plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject)], url)
         } else {
             location.href = url;
@@ -28,7 +28,7 @@ LMPNavigator.prototype.push = function(url) {
 LMPNavigator.prototype.pop = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
-        if (_this._lm) {
+        if (_this._inApp) {
             plus.bridge.exec("LMNavigation", "popView", [plus.bridge.callbackId(resolve, reject)], url)
         } else {
             location.href = url
