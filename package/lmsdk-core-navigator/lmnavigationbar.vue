@@ -95,7 +95,7 @@
              */
             backgroundColor: {
                 type: String,
-                default: '#FFFFFF'
+                default: ''
             },
             /**
              * 是否包含状态栏，默认固定在顶部时包含
@@ -143,7 +143,10 @@
         created: function() {
             var _this = this;
             if ( localURL.query._lm ) {
-                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], url, {
+				var resolve = function() {}
+				var reject = function() {}
+				
+                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject), location.href, {
                     title: _this.title,
                     leftText: _this.leftText,
                     rightText: _this.rightText,
@@ -156,7 +159,7 @@
                     leftWeight: _this.leftWeight,
                     rightSize: _this.rightSize,
                     rightWeight: _this.rightWeight
-                })
+                }])
             }
         },
         computed: {
