@@ -1,8 +1,8 @@
 const url = require('url');
 const Web3 = require('web3');
 
-const lmsdk_eth_providers = require('../lmsdk-eth-providers');
-const lmsdk_core_navigator = require('./package/lmsdk-core-navigator')
+import lmsdk_eth_providers from '../lmsdk-eth-providers'
+import lmsdk_core_navigator from './package/lmsdk-core-navigator'
 
 var localURL = url.parse(location.href, true);
 

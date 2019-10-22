@@ -5,7 +5,8 @@
 </template>
 
 <script>
-	import lmsdk_core_navigator from './index.js'
+	import lmsdk_core_navigator from './lmnavigator.js'
+	
     const navigator = new lmsdk_core_navigator();
 
     /// type: push，pop，poptoroot
