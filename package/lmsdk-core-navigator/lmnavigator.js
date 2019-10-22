@@ -1,10 +1,15 @@
 const url = require('url');
 var localURL = url.parse(location.href, true);
 
+var lmNavigationBar = require('./lmnavigationbar.js');
+
 var LMPNavigator = function LMPNavigator() {
+
     if (localURL.query._lm) {
         this._inApp = true
+        this.navigationBar = new lmNavigationBar();
     }
+    
 }
 
 LMPNavigator.prototype.types = {
