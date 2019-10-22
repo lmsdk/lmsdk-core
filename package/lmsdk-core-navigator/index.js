@@ -3,10 +3,10 @@ var LMPNavigator = function LMPNavigator() {
 }
 
 LMPNavigator.prototype.types = {
-    Push: "Push",
-    Pop: "Pop",
-    PopToRoot: "PopToRoot",
-    SetTabSelected:"SetTabSelected"
+    Push: "push",
+    Pop: "pop",
+    PopToRoot: "poptoroot",
+    SetTabSelected:"settabselected"
 }
 
 LMPNavigator.prototype.push = function(url) {
@@ -20,7 +20,7 @@ LMPNavigator.prototype.push = function(url) {
             reject();
         }
 
-        plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(success, fail)], url])
+        plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(success, fail)], url)
     });
 }
 
