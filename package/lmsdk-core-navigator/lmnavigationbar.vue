@@ -62,6 +62,14 @@
                 type: String,
                 default: ''
             },
+            leftColor: {
+                type: String,
+                default: ''
+            },
+            rightColor: {
+                type: String,
+                default: ''
+            },
             /**
              * 左侧按钮图标
              */
@@ -88,7 +96,7 @@
              */
             color: {
                 type: String,
-                default: '#000000'
+                default: '#FFFFFF'
             },
             /**
              * 背景颜色
@@ -143,22 +151,27 @@
         created: function() {
             var _this = this;
             if ( localURL.query._lm ) {
-				var resolve = function() {}
+
 				var reject = function() {}
 				
-                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject), location.href, {
+                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
+                    
                     title: _this.title,
-                    leftText: _this.leftText,
-                    rightText: _this.rightText,
-                    leftIcon: _this.leftIcon,
-                    rightIcon: _this.rightIcon,
                     color: _this.color,
                     backgroundColor: _this.backgroundColor,
                     shadow: _this.shadow,
+                    
+                    leftText: _this.leftText,
+                    leftIcon: _this.leftIcon,
                     leftSize: _this.leftSize,
                     leftWeight: _this.leftWeight,
+                    leftColor: _this.leftColor,
+                    
+                    rightText: _this.rightText,
+                    rightIcon: _this.rightIcon,
                     rightSize: _this.rightSize,
-                    rightWeight: _this.rightWeight
+                    rightWeight: _this.rightWeight,
+                    rightColor: _this.rightColor
                 }])
             }
         },
@@ -189,6 +202,9 @@
             }
         },
         methods: {
+            onClick(tap) {
+                console.log(tap)
+            },
             /**
              * 左侧按钮点击事件
              */
@@ -212,7 +228,7 @@
         display: block;
         position: relative;
         width: 100%;
-        background-color: #FFFFFF;
+        background-color: #313345;
         overflow: hidden;
     }
 
@@ -221,7 +237,7 @@
 	}
 
     .uni-navbar-shadow {
-        box-shadow: 0 1px 6px #ccc;
+        box-shadow: 0 0px 0px #ccc;
     }
 
     .uni-navbar.uni-navbar-fixed {
@@ -235,7 +251,7 @@
         width: 100%;
         height:44px;
         line-height:44px;
-        font-size: 16px;
+        font-size: 18px;
     }
 
 	.uni-navbar-header .uni-navbar-header-btns{
