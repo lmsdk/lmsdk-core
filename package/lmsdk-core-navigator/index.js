@@ -3,10 +3,10 @@ var LMPNavigator = function LMPNavigator() {
 }
 
 LMPNavigator.prototype.types = {
-    Push: "PUSH",
-    Pop: "POP",
-    PopToRoot: "POPTOROOT",
-    SetTabSelected:"SETTABLESELECTED"
+    Push: "Push",
+    Pop: "Pop",
+    PopToRoot: "PopToRoot",
+    SetTabSelected:"SetTabSelected"
 }
 
 LMPNavigator.prototype.push = function(url) {
