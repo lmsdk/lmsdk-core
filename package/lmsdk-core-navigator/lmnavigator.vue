@@ -4,7 +4,7 @@
 
 <script>
 
-    const lmsdk_core_navigator = require('index.js');
+    const lmsdk_core_navigator = require('./index.js');
     var navigator = new lmsdk_core_navigator();
 
     /// type: push，pop，poptoroot
@@ -15,7 +15,6 @@
         },
         methods: {
             navigatorTagOnClick() {
-                console.log("Navigator" + this.type + "," + this.param);
                 switch (this.type) {
                     case navigator.types.Push: return navigator.push(this.param).then();
                     case navigator.types.Pop:  return navigator.pop(this.param).then();
