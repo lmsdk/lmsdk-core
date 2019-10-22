@@ -10,77 +10,35 @@ LMPNavigator.prototype.types = {
 }
 
 LMPNavigator.prototype.push = function(url) {
-
     return new Promise(function(resolve, reject) {
-        var success = function() {
-            resolve();
-        }
-
-        var fail = function() {
-            reject();
-        }
-
-        plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(success, fail)], url)
+        plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject)], url)
     });
 }
 
 LMPNavigator.prototype.pop = function(url) {
-
     return new Promise(function(resolve, reject) {
-        var success = function() {
-            resolve();
-        }
-
-        var fail = function() {
-            reject();
-        }
-
-        plus.bridge.exec("LMNavigation", "popView", [plus.bridge.callbackId(success, fail)], url)
+        plus.bridge.exec("LMNavigation", "popView", [plus.bridge.callbackId(resolve, reject)], url)
     });
 }
 
 LMPNavigator.prototype.popToRoot = function() {
 
     return new Promise(function(resolve, reject) {
-        var success = function() {
-            resolve();
-        }
-
-        var fail = function() {
-            reject();
-        }
-
-        plus.bridge.exec("LMNavigation", "popToRoot", [plus.bridge.callbackId(success, fail)])
+        plus.bridge.exec("LMNavigation", "popToRoot", [plus.bridge.callbackId(resolve, reject)])
     });
 }
 
 LMPNavigator.prototype.setSelectedTabBarIndex = function(index) {
 
     return new Promise(function(resolve, reject) {
-        var success = function() {
-            resolve();
-        }
-
-        var fail = function() {
-            reject();
-        }
-
-        plus.bridge.exec("LMNavigation", "setSelectedTabBarIndex", [plus.bridge.callbackId(success, fail)], index)
+        plus.bridge.exec("LMNavigation", "setSelectedTabBarIndex", [plus.bridge.callbackId(resolve, reject)], index)
     });
 }
 
 LMPNavigator.prototype.selectedTarBarIndex = function() {
 
     return new Promise(function(resolve, reject) {
-        var success = function() {
-            resolve();
-        }
-
-        var fail = function() {
-            reject();
-        }
-
-        plus.bridge.exec("LMNavigation", "selectedTarBarIndex", [plus.bridge.callbackId(success, fail)])
+        plus.bridge.exec("LMNavigation", "selectedTarBarIndex", [plus.bridge.callbackId(resolve, reject)])
     });
 }
 

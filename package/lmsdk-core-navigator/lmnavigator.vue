@@ -4,8 +4,7 @@
 
 <script>
 
-    const lmsdk_core_navigator = require('../package/lmsdk_core_navigator');
-
+    const lmsdk_core_navigator = require('index.js');
     var navigator = new lmsdk_core_navigator();
 
     /// type: push，pop，poptoroot
@@ -15,13 +14,13 @@
             param: String,
         },
         methods: {
-            async navigatorTagOnClick() {
+            navigatorTagOnClick() {
                 console.log("Navigator" + this.type + "," + this.param);
                 switch (this.type) {
-                    case navigator.types.Push: return (await navigator.push(this.param))
-                    case navigator.types.Pop:  return (await navigator.pop(this.param))
-                    case navigator.types.PopToRoot: return (await navigator.popToRoot())
-                    case navigator.types.SetTabSelected: return (await navigator.setSelectedTabBarIndex(this.param))
+                    case navigator.types.Push: return navigator.push(this.param).then();
+                    case navigator.types.Pop:  return navigator.pop(this.param).then();
+                    case navigator.types.PopToRoot: return navigator.popToRoot().then();
+                    case navigator.types.SetTabSelected: return navigator.setSelectedTabBarIndex(this.param).then()
                     default: return
                 }
             }
