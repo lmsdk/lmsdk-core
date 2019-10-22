@@ -1,26 +1,25 @@
 <template>
-    <view @click="navigatorTagOnClick">
+    <view @tap="navigatorTagOnClick">
 		<slot></slot>
 	</view>
 </template>
 
 <script>
-
-    const lmsdk_core_navigator = require('./index.js');
-    var navigator = new lmsdk_core_navigator();
+	import lmsdk_core_navigator from './index.js'
+    const navigator = new lmsdk_core_navigator();
 
     /// type: push，pop，poptoroot
     export default {
         props: {
             type: String,
-            param: String,
+            param: String
         },
         methods: {
             navigatorTagOnClick() {
                 switch (this.type) {
-                    case navigator.types.Push: return navigator.push(this.param).then();
-                    case navigator.types.Pop:  return navigator.pop(this.param).then();
-                    case navigator.types.PopToRoot: return navigator.popToRoot().then();
+                    case navigator.types.Push: return navigator.push(this.param).then()
+                    case navigator.types.Pop:  return navigator.pop(this.param).then()
+                    case navigator.types.PopToRoot: return navigator.popToRoot().then()
                     case navigator.types.SetTabSelected: return navigator.setSelectedTabBarIndex(this.param).then()
                     default: return
                 }
