@@ -16,6 +16,7 @@
         },
         methods: {
             async navigatorTagOnClick() {
+                console.log("Navigator" + this.type + "," + this.param);
                 switch (this.type) {
                     case navigator.types.Push: return (await navigator.push(this.param))
                     case navigator.types.Pop:  return (await navigator.pop(this.param))
