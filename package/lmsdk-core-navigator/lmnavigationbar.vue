@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    
+
     const lmsdk_core_navigationBar = require('./lmnavigationbar.js');
 
     export default {
