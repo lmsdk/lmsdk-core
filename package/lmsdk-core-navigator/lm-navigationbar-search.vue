@@ -64,7 +64,9 @@
 			}
         },
         created: function() {
+            
             var _this = this;
+            
             if ( localURL.query._lm ) {
 
 				var reject = function() {}
