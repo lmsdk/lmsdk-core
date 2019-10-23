@@ -11,8 +11,7 @@
 	
 	const url = require('url');
 	const localURL = url.parse(location.href, true);
-    const lmsdk_core_navigationBar = require('./lmnavigationbar.js');
-
+    
     export default {
         components: { uniIcons },
 		data() {
@@ -64,7 +63,7 @@
 				var reject = function() {}
 				
                 plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
-                    navstyle: "search",
+                    navstyle: "walletSelect",
                     text: _this.text,
                     textSize: _this.textSize,
                     textColor: _this.textColor,

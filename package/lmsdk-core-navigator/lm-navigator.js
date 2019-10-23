@@ -1,7 +1,7 @@
 const url = require('url');
 var localURL = url.parse(location.href, true);
 
-var lmNavigationBar = require('./lmnavigationbar.js');
+var lmNavigationBar = require('./lm-navigationbar.js');
 
 var LMPNavigator = function LMPNavigator() {
 

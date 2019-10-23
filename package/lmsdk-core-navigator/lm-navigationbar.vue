@@ -31,8 +31,7 @@
 	
 	const url = require('url');
 	const localURL = url.parse(location.href, true);
-    const lmsdk_core_navigationBar = require('./lmnavigationbar.js');
-
+   
     export default {
         components: { uniIcons },
 		data() {
@@ -41,24 +40,31 @@
 			}
 		},
         props: {
-            /**
-             * 标题文字
-             */
             title: {
                 type: String,
                 default: ''
             },
-            /**
-             * 左侧按钮文本
-             */
-            leftText: {
+            fixed: {
+                type: [Boolean, String],
+                default: false
+            },
+            color: {
+                type: String,
+                default: '#FFFFFF'
+            },
+            backgroundColor: {
                 type: String,
                 default: ''
             },
-            /**
-             * 右侧按钮文本
-             */
-            rightText: {
+            statusBar: {
+                type: [Boolean, String],
+                default: ''
+            },
+            shadow: {
+                type: String,
+                default: ''
+            },
+            leftText: {
                 type: String,
                 default: ''
             },
@@ -66,87 +72,38 @@
                 type: String,
                 default: ''
             },
-            rightColor: {
-                type: String,
-                default: ''
+            leftSize: {
+            	type: [Number, String],
+            	default: '24'
             },
-            /**
-             * 左侧按钮图标
-             */
+            leftWeight: {
+            	type: String,
+            	default: ''
+            },
             leftIcon: {
                 type: String,
                 default: ''
             },
-            /**
-             * 右侧按钮图标
-             */
             rightIcon: {
                 type: String,
                 default: ''
             },
-            /**
-             * 是否固定在顶部
-             */
-            fixed: {
-                type: [Boolean, String],
-                default: false
-            },
-            /**
-             * 按钮图标和文字颜色
-             */
-            color: {
-                type: String,
-                default: '#FFFFFF'
-            },
-            /**
-             * 背景颜色
-             */
-            backgroundColor: {
+            rightText: {
                 type: String,
                 default: ''
             },
-            /**
-             * 是否包含状态栏，默认固定在顶部时包含
-             */
-            statusBar: {
-                type: [Boolean, String],
-                default: ''
-            },
-            /**
-             * 是否使用阴影，默认根据背景色判断
-             */
-            shadow: {
-                type: String,
-                default: ''
-            },
-			/**
-			 * 左侧图标大小
-			 */
-			leftSize: {
-				type: [Number, String],
-				default: '24'
+			rightColor: {
+			    type: String,
+			    default: ''
 			},
-			/**
-			 * 左侧图标样式
-			 */
-			leftWeight: {
-				type: String,
-				default: ''
-			},
-			/**
-			 * 右侧图标大小
-			 */
 			rightSize: {
 				type: [Number, String],
 				default: '24'
 			},
-			/**
-			 * 右侧图标样式
-			 */
 			rightWeight: {
 				type: String,
 				default: ''
-			},
+			}
         },
         created: function() {
             var _this = this;

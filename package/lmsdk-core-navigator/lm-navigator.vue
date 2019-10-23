@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import lmsdk_core_navigator from './lmnavigator.js'
+	import lmsdk_core_navigator from './lm-navigator.js'
 	
     const navigator = new lmsdk_core_navigator();
 
