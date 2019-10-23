@@ -62,7 +62,7 @@
 
 				var reject = function() {}
 				
-                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
                     navstyle: "search",
                     text: _this.text,
                     textSize: _this.textSize,

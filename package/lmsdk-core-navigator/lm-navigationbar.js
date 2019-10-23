@@ -11,7 +11,7 @@ LMPNavigationBar.prototype.setNavigationBarStyle = function(options) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], location.href, options)
+            plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(resolve, reject)], location.href, options)
         }
     });
 }

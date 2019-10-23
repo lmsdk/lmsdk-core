@@ -23,7 +23,7 @@ LMPNavigator.prototype.push = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigation", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject)], url)
+            plus.bridge.exec("LMNavigator", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject)], url)
         } else {
             location.href = url;
         }
@@ -34,7 +34,7 @@ LMPNavigator.prototype.pop = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigation", "popView", [plus.bridge.callbackId(resolve, reject)], url)
+            plus.bridge.exec("LMNavigator", "popView", [plus.bridge.callbackId(resolve, reject)], url)
         } else {
             location.href = url
         }
@@ -43,21 +43,21 @@ LMPNavigator.prototype.pop = function(url) {
 
 LMPNavigator.prototype.popToRoot = function() {
     return new Promise(function(resolve, reject) {
-        plus.bridge.exec("LMNavigation", "popToRoot", [plus.bridge.callbackId(resolve, reject)])
+        plus.bridge.exec("LMNavigator", "popToRoot", [plus.bridge.callbackId(resolve, reject)])
     });
 }
 
 LMPNavigator.prototype.setSelectedTabBarIndex = function(index) {
 
     return new Promise(function(resolve, reject) {
-        plus.bridge.exec("LMNavigation", "setSelectedTabBarIndex", [plus.bridge.callbackId(resolve, reject)], index)
+        plus.bridge.exec("LMNavigator", "setSelectedTabBarIndex", [plus.bridge.callbackId(resolve, reject)], index)
     });
 }
 
 LMPNavigator.prototype.selectedTarBarIndex = function() {
 
     return new Promise(function(resolve, reject) {
-        plus.bridge.exec("LMNavigation", "selectedTarBarIndex", [plus.bridge.callbackId(resolve, reject)])
+        plus.bridge.exec("LMNavigator", "selectedTarBarIndex", [plus.bridge.callbackId(resolve, reject)])
     });
 }
 

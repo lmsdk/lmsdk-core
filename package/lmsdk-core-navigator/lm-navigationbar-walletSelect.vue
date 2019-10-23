@@ -7,8 +7,6 @@
 </template>
 
 <script>
-	import uniIcons from '@/components/uni-icons/uni-icons.vue'
-	
 	const url = require('url');
 	const localURL = url.parse(location.href, true);
     
@@ -20,71 +18,55 @@
 			}
 		},
         props: {
-            /**
-             * 搜索图标颜色
-             */
-            iconColor: {
-                type: String,
-                default: '0xFFFFFF'
-            },
-			
-            /**
-             * 未输入前的提示文字
-             */
-            placeholder: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 当前搜索框已经输入的内容
-             */
-            text: {
-                type: String,
-                default: ''
-            },
-            textSize: Number,
-            textColor: {
-                type: String,
-                default: '',
-            },
-			backgroundColor: {
-				type: String,
-				default: ''
-			},
 			shadow: {
 				type: String,
 				default: ''
-			}
+			},
+            backgroundColor: {
+            	type: String,
+            	default: ''
+            },
+            rightIcon: {
+                type: String,
+                default: ''
+            },
+            rightText: {
+                type: String,
+                default: ''
+            },
+            rightColor: {
+                type: String,
+                default: ''
+            },
+            rightSize: {
+            	type: [Number, String],
+            	default: '24'
+            },
+            rightWeight: {
+            	type: String,
+            	default: ''
+            }
         },
         created: function() {
+            
             var _this = this;
             if ( localURL.query._lm ) {
-
 				var reject = function() {}
-				
-                plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner, reject), location.href, {
                     navstyle: "walletSelect",
-                    text: _this.text,
-                    textSize: _this.textSize,
-                    textColor: _this.textColor,
-                    iconColor: _this.iconColor,
-                    placeholder: _this.placeholder,
+                    shadow: _this.shadow,
+                    backgroundColor: _this.backgroundColor,
+                    rightIcon: _this.rightIcon,
+                    rightText: _this.rightText,
+                    rightColor: _this.rightColor,
+                    rightSize: _this.rightSize,
+                    rightWeight: _this.rightWeight
                 }])
             }
         },
         computed: {
             isFixed() {
                 return String(this.fixed) === 'true'
-            },
-            insertStatusBar() {
-                switch (String(this.statusBar)) {
-                    case 'true':
-                        return true
-                    case 'false':
-                        return false
-                    default:
-                        return this.isFixed
-                }
             },
             hasShadow() {
                 var backgroundColor = this.backgroundColor
