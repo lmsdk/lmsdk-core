@@ -35,6 +35,10 @@
                 type: String,
                 default: ''
             },
+            placeholderColor: {
+                type: String,
+                default: ''                
+            },
             /**
              * 当前搜索框已经输入的内容
              */
@@ -42,7 +46,10 @@
                 type: String,
                 default: ''
             },
-            textSize: Number,
+            textSize: {
+                type: [String, Number],
+                default: '',
+            },
             textColor: {
                 type: String,
                 default: '',
@@ -62,13 +69,15 @@
 
 				var reject = function() {}
 				
-                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner, reject), location.href, {
                     navstyle: "search",
+                    backgroundColor: _this.backgroundColor,
                     text: _this.text,
                     textSize: _this.textSize,
                     textColor: _this.textColor,
                     iconColor: _this.iconColor,
                     placeholder: _this.placeholder,
+                    placeholderColor: _this.placeholderColor,
                 }])
             }
         },
@@ -100,7 +109,28 @@
         },
         methods: {
             eventListner(event) {
-				
+				switch(event.event) {
+                    case "beginEdit": this.onBeginEdit(event.text); break;
+                    case "textChanged": this.onTextChanged(event.text); break;
+                    case "endEdit": this.onEndEdit(event.text); break;
+                    case "searchButtonClicked": this.onSearchButtonClicked(event.text); break;
+                }
+            },
+            onBeginEdit(text) {
+                this.$emit('beginEdit', text)
+                this.$emit('begin-edit', text)
+            },
+            onEndEdit(text) {
+                this.$emit('endEdit', text)
+                this.$emit('end-edit', text)
+            },
+            onTextChanged(text) {
+                this.$emit('textChanged', text)
+                this.$emit('text-changed', text)
+            },
+            onSearchButtonClicked(text) {
+                this.$emit('searchButtonClicked', text)
+                this.$emit('search-button-clicked', text)
             }
         }
     }

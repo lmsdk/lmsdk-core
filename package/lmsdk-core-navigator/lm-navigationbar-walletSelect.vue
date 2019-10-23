@@ -1,30 +1,26 @@
 <template>
-	<view v-if="!lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
-		<view class="uni-navbar-header" :style="{backgroundColor: backgroundColor}">
-			
-		</view>
-	</view>
+    <view v-if="!lmAPP">
+    </view>
 </template>
 
 <script>
-	const url = require('url');
-	const localURL = url.parse(location.href, true);
-    
+    const url = require('url');
+    const localURL = url.parse(location.href, true);
+
     export default {
-        components: { uniIcons },
-		data() {
-			return {
-				lmAPP: localURL.query._lm
-			}
-		},
+        data() {
+            return {
+                lmAPP: localURL.query._lm
+            }
+        },
         props: {
-			shadow: {
-				type: String,
-				default: ''
-			},
+            shadow: {
+                type: String,
+                default: ''
+            },
             backgroundColor: {
-            	type: String,
-            	default: ''
+                type: String,
+                default: ''
             },
             rightIcon: {
                 type: String,
@@ -39,20 +35,21 @@
                 default: ''
             },
             rightSize: {
-            	type: [Number, String],
-            	default: '24'
+                type: [Number, String],
+                default: '24'
             },
             rightWeight: {
-            	type: String,
-            	default: ''
+                type: String,
+                default: ''
             }
         },
         created: function() {
-            
+
             var _this = this;
-            if ( localURL.query._lm ) {
-				var reject = function() {}
-                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner, reject), location.href, {
+            if (localURL.query._lm) {
+                var reject = function() {}
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner,
+                    reject), location.href, {
                     navstyle: "walletSelect",
                     shadow: _this.shadow,
                     backgroundColor: _this.backgroundColor,
@@ -60,7 +57,7 @@
                     rightText: _this.rightText,
                     rightColor: _this.rightColor,
                     rightSize: _this.rightSize,
-                    rightWeight: _this.rightWeight
+                    rightWeight: _this.rightWeight,
                 }])
             }
         },
@@ -81,8 +78,14 @@
             }
         },
         methods: {
-            eventListner(event) {
-				
+            eventListner(tap) {
+                if (tap && tap.index === 1) {
+                    this.onClickRight()
+                }
+            },
+            onClickRight() {
+                this.$emit('rightClick')
+                this.$emit('right-click')
             }
         }
     }
@@ -97,9 +100,9 @@
         overflow: hidden;
     }
 
-	.uni-navbar view{
-		line-height:44px;
-	}
+    .uni-navbar view {
+        line-height: 44px;
+    }
 
     .uni-navbar-shadow {
         box-shadow: 0 0px 0px #ccc;
@@ -114,32 +117,33 @@
         display: flex;
         flex-direction: row;
         width: 100%;
-        height:44px;
-        line-height:44px;
+        height: 44px;
+        line-height: 44px;
         font-size: 18px;
     }
 
-	.uni-navbar-header .uni-navbar-header-btns{
-		display:inline-flex;
-		flex-wrap:nowrap;
-		flex-shrink:0;
-		width: 120rpx;
-		padding: 0 25rpx;
-		box-sizing: border-box;
-	}
+    .uni-navbar-header .uni-navbar-header-btns {
+        display: inline-flex;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        width: 120rpx;
+        padding: 0 25rpx;
+        box-sizing: border-box;
+    }
 
-	.uni-navbar-header .uni-navbar-header-btns:last-child {
-		display: flex;
-		justify-content: flex-end;
-	}
+    .uni-navbar-header .uni-navbar-header-btns:last-child {
+        display: flex;
+        justify-content: flex-end;
+    }
 
-	.uni-navbar-container{
-		width:100%;
-		margin:0 10rpx;
-	}
-	.uni-navbar-container-title{
-		font-size: 37.5rpx;
-		font-weight: bold;
-		text-align: center;
-	}
+    .uni-navbar-container {
+        width: 100%;
+        margin: 0 10rpx;
+    }
+
+    .uni-navbar-container-title {
+        font-size: 37.5rpx;
+        font-weight: bold;
+        text-align: center;
+    }
 </style>

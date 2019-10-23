@@ -129,7 +129,7 @@
                     rightIcon: _this.rightIcon,
                     rightSize: _this.rightSize,
                     rightWeight: _this.rightWeight,
-                    rightColor: _this.rightColor
+                    rightColor: _this.rightColor,
                 }])
             }
         },
