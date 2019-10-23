@@ -1,1 +1,1 @@
-export default require('./lmnavigator.js')
+export default require('./lm-navigator.js')
