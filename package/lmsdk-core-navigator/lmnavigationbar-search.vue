@@ -42,111 +42,34 @@
 		},
         props: {
             /**
-             * 标题文字
+             * 搜索图标颜色
              */
-            title: {
+            iconColor: {
+                type: String,
+                default: '0xFFFFFF'
+            },
+            /**
+             * 未输入前的提示文字
+             */
+            placeholder: {
                 type: String,
                 default: ''
             },
             /**
-             * 左侧按钮文本
+             * 当前搜索框已经输入的内容
              */
-            leftText: {
+            text: {
                 type: String,
                 default: ''
             },
-            /**
-             * 右侧按钮文本
-             */
-            rightText: {
-                type: String,
+            textSize: {
+                type: Number,
                 default: ''
             },
-            leftColor: {
-                type: String,
-                default: ''
-            },
-            rightColor: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 左侧按钮图标
-             */
-            leftIcon: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 右侧按钮图标
-             */
-            rightIcon: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 是否固定在顶部
-             */
-            fixed: {
-                type: [Boolean, String],
-                default: false
-            },
-            /**
-             * 按钮图标和文字颜色
-             */
-            color: {
-                type: String,
-                default: '#FFFFFF'
-            },
-            /**
-             * 背景颜色
-             */
-            backgroundColor: {
-                type: String,
-                default: ''
-            },
-            /**
-             * 是否包含状态栏，默认固定在顶部时包含
-             */
-            statusBar: {
-                type: [Boolean, String],
-                default: ''
-            },
-            /**
-             * 是否使用阴影，默认根据背景色判断
-             */
-            shadow: {
-                type: String,
-                default: ''
-            },
-			/**
-			 * 左侧图标大小
-			 */
-			leftSize: {
-				type: [Number, String],
-				default: '24'
-			},
-			/**
-			 * 左侧图标样式
-			 */
-			leftWeight: {
-				type: String,
-				default: ''
-			},
-			/**
-			 * 右侧图标大小
-			 */
-			rightSize: {
-				type: [Number, String],
-				default: '24'
-			},
-			/**
-			 * 右侧图标样式
-			 */
-			rightWeight: {
-				type: String,
-				default: ''
-			},
+            textColor: {
+                type: Number,
+                default: '',
+            }
         },
         created: function() {
             var _this = this;
@@ -155,24 +78,12 @@
 				var reject = function() {}
 				
                 plus.bridge.exec("LMNavigation", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
-                    
-                    navstyle: "custom",
-                    title: _this.title,
-                    color: _this.color,
-                    backgroundColor: _this.backgroundColor,
-                    shadow: _this.shadow,
-                    
-                    leftText: _this.leftText,
-                    leftIcon: _this.leftIcon,
-                    leftSize: _this.leftSize,
-                    leftWeight: _this.leftWeight,
-                    leftColor: _this.leftColor,
-                    
-                    rightText: _this.rightText,
-                    rightIcon: _this.rightIcon,
-                    rightSize: _this.rightSize,
-                    rightWeight: _this.rightWeight,
-                    rightColor: _this.rightColor
+                    navstyle: "search",
+                    text: _this.text,
+                    textSize: _this.textSize,
+                    textColor: _this.textColor,
+                    iconColor: _this.iconColor,
+                    placeholder: _this.placeholder,
                 }])
             }
         },
@@ -203,26 +114,8 @@
             }
         },
         methods: {
-            onClick(tap) {
-				if (tap && tap.index === 0) {
-					this.onClickLeft()
-				} else if (tap && tap.index === 1) {
-					this.onClickRight()
-				}
-            },
-            /**
-             * 左侧按钮点击事件
-             */
-            onClickLeft() {
-                this.$emit('leftClick')
-                this.$emit('left-click')
-            },
-            /**
-             * 右侧按钮点击事件
-             */
-            onClickRight() {
-                this.$emit('rightClick')
-                this.$emit('right-click')
+            eventListner(event) {
+				
             }
         }
     }
