@@ -8,11 +8,11 @@
         created: function() {
             var _this = this;
             document.addEventListener("lmEvent_ThemeChanged", function(event) {
-                _this.onLanguageChanged(event);
+                _this.onThemeChanged(event);
             })
         },
         methods: {
-            onLanguageChanged(event) {
+            onThemeChanged(event) {
                 this.$emit('onChanged', event)
                 this.$emit('on-changed', event)
             }
