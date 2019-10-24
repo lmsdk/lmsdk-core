@@ -23,7 +23,7 @@ LMPNavigator.prototype.push = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigator", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject)], url)
+            plus.bridge.exec("LMNavigator", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject), url])
         } else {
             location.href = url;
         }
@@ -34,7 +34,7 @@ LMPNavigator.prototype.pop = function(url) {
     var _this = this;
     return new Promise(function(resolve, reject) {
         if (_this._inApp) {
-            plus.bridge.exec("LMNavigator", "popView", [plus.bridge.callbackId(resolve, reject)], url)
+            plus.bridge.exec("LMNavigator", "popView", [plus.bridge.callbackId(resolve, reject), url])
         } else {
             location.href = url
         }
