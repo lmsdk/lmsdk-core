@@ -75,7 +75,7 @@
             	type: [Number, String],
             	default: '24'
             },
-            leftWeight: {
+            leftSrc: {
             	type: String,
             	default: ''
             },
@@ -99,7 +99,7 @@
 				type: [Number, String],
 				default: '24'
 			},
-			rightWeight: {
+			rightSrc: {
 				type: String,
 				default: ''
 			}
@@ -119,13 +119,13 @@
                     leftText: _this.leftText,
                     leftIcon: _this.leftIcon,
                     leftSize: _this.leftSize,
-                    leftWeight: _this.leftWeight,
+                    leftSrc: _this.rightSrc,
                     leftColor: _this.leftColor,
                     
                     rightText: _this.rightText,
                     rightIcon: _this.rightIcon,
                     rightSize: _this.rightSize,
-                    rightWeight: _this.rightWeight,
+                    rightSrc: _this.rightSrc,
                     rightColor: _this.rightColor,
                 }])
             }
