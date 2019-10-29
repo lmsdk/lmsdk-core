@@ -29,14 +29,13 @@
 <script>
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	
-	const url = require('url');
-	const localURL = url.parse(location.href, true);
+	import LMPUtils from '../lmsdk-core-utils'
    
     export default {
         components: { uniIcons },
 		data() {
 			return {
-				lmAPP: localURL.query._lm
+				lmAPP: LMPUtils.inLmApp
 			}
 		},
         props: {
@@ -107,10 +106,8 @@
         },
         created: function() {
             var _this = this;
-            if ( localURL.query._lm ) {
-
+            if ( LMPUtils.inLmApp ) {
 				var reject = function() {}
-				
                 plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
                     
                     navstyle: "custom",

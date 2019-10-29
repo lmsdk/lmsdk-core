@@ -13,13 +13,13 @@
 </template>
 
 <script>
-    const url = require('url');
-    const localURL = url.parse(location.href, true);
-
+    
+    import LMPUtils from '../lmsdk-core-utils'
+    
     export default {
         data() {
             return {
-                lmAPP: localURL.query._lm
+                lmAPP: LMPUtils.inLmApp
             }
         },
         props: {
@@ -52,11 +52,14 @@
                 default: ''
             }
         },
-        created: function() {
-
+        mounted: function (options) {
+            
+        },
+        created: function(options) {
+            
             var _this = this;
-            if (localURL.query._lm) {
-                var reject = function() {}
+            if (LMPUtils.inLmApp) {
+                var reject = function(err) {console.error(err)}
                 plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner,
                     reject), location.href, {
                     navstyle: "walletSelect",

@@ -1,15 +1,11 @@
-const url = require('url');
-var localURL = url.parse(location.href, true);
+import LMPUtils from '../lmsdk-core-utils'
 
 var lmNavigationBar = require('./lm-navigationbar.js');
 
 var LMPNavigator = function LMPNavigator() {
-
-    if (localURL.query._lm) {
-        this._inApp = true
+    if (LMPUtils.inLmApp) {
         this.navigationBar = new lmNavigationBar();
     }
-    
 }
 
 LMPNavigator.prototype.types = {
@@ -20,9 +16,8 @@ LMPNavigator.prototype.types = {
 }
 
 LMPNavigator.prototype.push = function(url) {
-    var _this = this;
     return new Promise(function(resolve, reject) {
-        if (_this._inApp) {
+        if (LMPUtils.inLmApp) {
             plus.bridge.exec("LMNavigator", "pushViewWithURL", [plus.bridge.callbackId(resolve, reject), url])
         } else {
             location.href = url;
@@ -31,9 +26,8 @@ LMPNavigator.prototype.push = function(url) {
 }
 
 LMPNavigator.prototype.pop = function(url) {
-    var _this = this;
     return new Promise(function(resolve, reject) {
-        if (_this._inApp) {
+        if (LMPUtils.inLmApp) {
             plus.bridge.exec("LMNavigator", "popView", [plus.bridge.callbackId(resolve, reject), url])
         } else {
             location.href = url
@@ -48,14 +42,12 @@ LMPNavigator.prototype.popToRoot = function() {
 }
 
 LMPNavigator.prototype.setSelectedTabBarIndex = function(index) {
-
     return new Promise(function(resolve, reject) {
         plus.bridge.exec("LMNavigator", "setSelectedTabBarIndex", [plus.bridge.callbackId(resolve, reject)], index)
     });
 }
 
 LMPNavigator.prototype.selectedTarBarIndex = function() {
-
     return new Promise(function(resolve, reject) {
         plus.bridge.exec("LMNavigator", "selectedTarBarIndex", [plus.bridge.callbackId(resolve, reject)])
     });
