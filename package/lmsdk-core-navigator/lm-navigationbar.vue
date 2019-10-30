@@ -4,7 +4,7 @@
 		<view class="uni-navbar-header" :style="{color:color}">
 			<view class="uni-navbar-header-btns" @tap="onClickLeft">
 				<view v-if="leftIcon.length">
-					<uni-icons :style="{'font-weight': leftWeight}" :type="leftIcon" :color="color" :size="leftSize"></uni-icons>
+					<uni-icons :style="{'font-weight': leftSize}" :type="leftIcon == 'default' ? 'back' : leftIcon" :color="color" :size="leftSize"></uni-icons>
 				</view>
 				<view v-if="leftText.length" class="uni-navbar-btn-text" :class="{'uni-navbar-btn-icon-left':!leftIcon.length}">{{leftText}}</view>
 				<slot name="left"></slot>
@@ -16,7 +16,7 @@
 			</view>
 			<view class="uni-navbar-header-btns" @tap="onClickRight">
                 <view v-if="rightIcon.length">
-                    <uni-icons :style="{'font-weight': rightWeight}" :type="rightIcon" :color="color" :size="rightSize"></uni-icons>
+                    <uni-icons :style="{'font-weight': rightSize}" :type="rightIcon" :color="color" :size="rightSize"></uni-icons>
                 </view>
                 <!-- 优先显示图标 -->
                 <view v-if="rightText.length&&!rightIcon.length" class="uni-navbar-btn-text">{{rightText}}</view>
@@ -81,7 +81,7 @@
             },
             leftIcon: {
                 type: String,
-                default: ''
+                default: 'default'
             },
             rightIcon: {
                 type: String,
@@ -105,6 +105,11 @@
 			}
         },
         created: function() {
+			
+			// if ( !this.leftText && !this.leftIcon && !this.leftsr ) {
+			// 	this.leftIcon = "back"
+			// }
+			
             var _this = this;
             if ( LMPUtils.inLmApp ) {
 				var reject = function() {}
@@ -168,8 +173,12 @@
              * 左侧按钮点击事件
              */
             onClickLeft() {
-                this.$emit('leftClick')
-                this.$emit('left-click')
+				if (this.leftIcon === 'default') {
+					uni.navigateBack()
+				} else {
+					this.$emit('leftClick')
+					this.$emit('left-click')
+				}
             },
             /**
              * 右侧按钮点击事件
