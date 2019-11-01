@@ -1,6 +1,5 @@
 <template>
 	<view v-if="!lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
-		<uni-status-bar v-if="insertStatusBar"></uni-status-bar>
 		<view class="uni-navbar-header" :style="{color:color}">
 			<view class="uni-navbar-header-btns" @tap="onClickLeft">
 				<view v-if="leftIcon.length">
@@ -53,10 +52,6 @@
             },
             backgroundColor: {
                 type: String,
-                default: ''
-            },
-            statusBar: {
-                type: [Boolean, String],
                 default: ''
             },
             shadow: {
@@ -138,16 +133,6 @@
         computed: {
             isFixed() {
                 return String(this.fixed) === 'true'
-            },
-            insertStatusBar() {
-                switch (String(this.statusBar)) {
-                    case 'true':
-                        return true
-                    case 'false':
-                        return false
-                    default:
-                        return this.isFixed
-                }
             },
             hasShadow() {
                 var backgroundColor = this.backgroundColor
