@@ -173,7 +173,7 @@
              * 左侧按钮点击事件
              */
             onClickLeft() {
-				if (this.leftIcon === 'default') {
+				if (this.leftIcon === 'default' || 'back') {
 					uni.navigateBack()
 				} else {
 					this.$emit('leftClick')
@@ -201,7 +201,7 @@
     }
 
 	.uni-navbar view{
-		line-height:44px;
+		line-height: 44px;
 	}
 
     .uni-navbar-shadow {
@@ -210,6 +210,8 @@
 
     .uni-navbar.uni-navbar-fixed {
         position: fixed;
+		top: 0;
+		left: 0;
         z-index: 998;
     }
 
@@ -227,8 +229,7 @@
 		flex-wrap:nowrap;
 		flex-shrink:0;
 		width: 120rpx;
-		padding: 0 25rpx;
-		box-sizing: border-box;
+		padding: 0 34.722222rpx;
 	}
 
 	.uni-navbar-header .uni-navbar-header-btns:last-child {
