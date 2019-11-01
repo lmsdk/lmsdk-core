@@ -1,7 +1,8 @@
 <template>
-	<view v-if="!lmAPP" class="uni-navbar" :class="{'uni-navbar-fixed':isFixed,'uni-navbar-shadow':hasShadow}" :style="{'background-color':backgroundColor}">
-		<view class="uni-navbar-header" :style="{backgroundColor: backgroundColor}">
-			
+	<view v-if="!lmAPP" class="box" :style="{ width: width }">
+		<view class="search">
+			<uni-icons type="search"></uni-icons>
+			<text>{{ placeholder }}</text>
 		</view>
 	</view>
 </template>
@@ -20,6 +21,14 @@
 			}
 		},
         props: {
+			/**
+			 * 搜索框宽度
+			 */
+			width: {
+			    type: String,
+			    default: '100%'
+			},
+			
             /**
              * 搜索图标颜色
              */
@@ -137,58 +146,23 @@
     }
 </script>
 
-<style>
-    .uni-navbar {
-        display: block;
-        position: relative;
-        width: 100%;
-        background-color: #313345;
-        overflow: hidden;
-    }
-
-	.uni-navbar view{
-		line-height:44px;
+<style lang="scss" scoped>
+	.box {
+		margin: 0 auto;
 	}
-
-    .uni-navbar-shadow {
-        box-shadow: 0 0px 0px #ccc;
-    }
-
-    .uni-navbar.uni-navbar-fixed {
-        position: fixed;
-        z-index: 998;
-    }
-
-    .uni-navbar-header {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        height:44px;
-        line-height:44px;
-        font-size: 18px;
-    }
-
-	.uni-navbar-header .uni-navbar-header-btns{
-		display:inline-flex;
-		flex-wrap:nowrap;
-		flex-shrink:0;
-		width: 120rpx;
-		padding: 0 25rpx;
-		box-sizing: border-box;
-	}
-
-	.uni-navbar-header .uni-navbar-header-btns:last-child {
+	.search {
+		width: 100%;
+		height: 69.444444rpx;
+		font-size: 29.166666rpx;
+		color: $uni-font-white;
 		display: flex;
-		justify-content: flex-end;
-	}
-
-	.uni-navbar-container{
-		width:100%;
-		margin:0 10rpx;
-	}
-	.uni-navbar-container-title{
-		font-size: 37.5rpx;
-		font-weight: bold;
-		text-align: center;
+		align-items: center;
+		justify-content: center;
+		// background-color: #34374D;
+		background-color: black;
+		border-radius: 140.277777rpx;
+		&>.iconfont {
+			margin-right: 34.722222rpx;
+		}
 	}
 </style>
