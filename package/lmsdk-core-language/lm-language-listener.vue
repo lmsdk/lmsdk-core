@@ -1,4 +1,5 @@
 <template>
+	<view></view>
 </template>
 
 <script>
@@ -13,8 +14,8 @@
         },
         methods: {
             onLanguageChanged(event) {
-                this.$emit('onChanged', event)
-                this.$emit('on-changed', event)
+                // this.$emit('onChanged', event)
+                this.$emit('change', event)
             }
         }
     }
