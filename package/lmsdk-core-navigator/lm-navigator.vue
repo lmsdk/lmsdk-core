@@ -18,6 +18,11 @@
         },
         methods: {
             navigatorTagOnClick() {
+				if (typeof lmAPP === undefined) {
+					uni.navigateTo({
+						url: this.param
+					})
+				}
                 switch (this.type) {
                     case navigator.types.Push: return navigator.push(this.param).then()
                     case navigator.types.Pop:  return navigator.pop(this.param).then()
