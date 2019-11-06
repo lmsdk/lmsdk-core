@@ -18,9 +18,9 @@
         },
         methods: {
             navigatorTagOnClick() {
-				if (typeof lmAPP === undefined) {
-					uni.navigateTo({
-						url: this.param
+				if (typeof lmAPP === 'undefined') {
+					return uni.navigateTo({
+						url: this.param.slice(1)
 					})
 				}
                 switch (this.type) {
