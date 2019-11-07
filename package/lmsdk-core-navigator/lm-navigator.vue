@@ -6,6 +6,7 @@
 
 <script>
     
+    import LMPUtils from '../lmsdk-core-utils'
 	import lmsdk_core_navigator from './lm-navigator.js'
 	
     const navigator = new lmsdk_core_navigator();
@@ -18,7 +19,7 @@
         },
         methods: {
             navigatorTagOnClick() {
-				if (typeof lmAPP === 'undefined') {
+				if (!LMPUtils.inLmApp) {
 					return uni.navigateTo({
 						url: this.param.slice(1)
 					})
