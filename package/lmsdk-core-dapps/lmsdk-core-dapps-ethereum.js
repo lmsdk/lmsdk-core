@@ -13,10 +13,10 @@ LMPDappsEthereum.prototype.getDappList = function() {
     });
 }
 
-LMPDappsEthereum.prototype.getDappForKey = function() {
+LMPDappsEthereum.prototype.getDappForKey = function(dappkey) {
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
-            plus.bridge.exec("LMDapps", "getDappForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum'])
+            plus.bridge.exec("LMDapps", "getDappForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum', dappkey])
         }
     });
 }
