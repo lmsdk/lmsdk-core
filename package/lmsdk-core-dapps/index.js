@@ -8,6 +8,17 @@ var LMPDapps = function LMPDapps() {
 LMPDapps.prototype.openDappWithDappKey = function(key) {
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
+			var list = JSON.parse(localStorage.getItem("searchHistory"));
+			if(list === null){list = []}
+			for (let k in list) {
+				if(list[k] === key){list.splice(k,1)}
+			}
+			list.unshift(key)
+			if(list.length>=6){
+				list.pop()
+			}
+			localStorage.setItem("searchHistory",JSON.stringify(list));
+			
             plus.bridge.exec("LMDapps", "openDappWithSchemas", [plus.bridge.callbackId(resolve, reject), "limowallet://limowallet.org/dapps/open?type=git&url=" + key])
         }
     });
