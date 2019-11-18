@@ -5,7 +5,6 @@ var LMPAssetsEthereum = function LMPAssetsEthereum() {
 }
 
 LMPAssetsEthereum.prototype.getAssetsList = function() {
-    var _this = this;
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
             plus.bridge.exec("LMAssets", "getAssetsList", [plus.bridge.callbackId(resolve, reject), 'ethereum'])
@@ -13,10 +12,10 @@ LMPAssetsEthereum.prototype.getAssetsList = function() {
     });
 }
 
-LMPAssetsEthereum.prototype.getAssetForKey = function() {
+LMPAssetsEthereum.prototype.getAssetForKey = function(key) {
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
-            plus.bridge.exec("LMAssets", "getAssetForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum'])
+            plus.bridge.exec("LMAssets", "getAssetForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum', key])
         }
     });
 }
