@@ -157,7 +157,7 @@
              * 左侧按钮点击事件
              */
             onClickLeft() {
-				if (this.leftIcon === 'default' || 'back') {
+				if (this.leftIcon === 'default' || this.leftIcon === 'back') {
 					uni.navigateBack()
 				} else {
 					this.$emit('leftClick')

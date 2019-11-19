@@ -8,9 +8,7 @@
 </template>
 
 <script>
-    
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
-    
 	import LMPUtils from '../lmsdk-core-utils'
     
     export default {
