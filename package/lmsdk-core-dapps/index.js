@@ -14,7 +14,7 @@ LMPDapps.prototype.openDappWithDappKey = function(key) {
 				if(list[k] === key){list.splice(k,1)}
 			}
 			list.unshift(key)
-			if(list.length>=6){
+			if(list.length>=5){
 				list.pop()
 			}
 			localStorage.setItem("recentlyUsed",JSON.stringify(list));
