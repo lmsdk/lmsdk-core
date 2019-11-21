@@ -70,14 +70,17 @@
 				default: ''
 			}
         },
+        mounted: function() {
+            const eventHandle = (event) => {
+                this.eventListner(event)
+            }
+            document.addEventListener("lmEvent_NavgationBarEvent", eventHandle);
+        },
         created: function() {
-            
             var _this = this;
-            
             if ( LMPUtils.inLmApp ) {
-
-				var reject = function() {}
-                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner, reject), location.href, {
+                var resolve = function(){}
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(resolve), location.href, {
                     navstyle: "search",
                     backgroundColor: _this.backgroundColor,
                     text: _this.text,

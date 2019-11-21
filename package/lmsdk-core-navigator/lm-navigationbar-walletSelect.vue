@@ -52,16 +52,18 @@
                 default: ''
             }
         },
-        mounted: function (options) {
-            
+        mounted: function() { 
+            const clickHandle = (tap) => {
+                this.eventListner(tap)
+            }
+            document.addEventListener("lmEvent_NavgationBarEvent", clickHandle);
         },
         created: function(options) {
             
             var _this = this;
             if (LMPUtils.inLmApp) {
-                var reject = function(err) {console.error(err)}
-                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.eventListner,
-                    reject), location.href, {
+                var resolve = function() {}
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(resolve), location.href, {
                     navstyle: "walletSelect",
                     shadow: _this.shadow,
                     backgroundColor: _this.backgroundColor,
@@ -91,7 +93,7 @@
         },
         methods: {
             eventListner(tap) {
-                if (tap && tap.index === 1) {
+                if (tap && tap.name === "right") {
                     this.onClickRight()
                 }
             },

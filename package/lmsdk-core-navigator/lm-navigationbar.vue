@@ -98,16 +98,19 @@
 				default: ''
 			}
         },
+        mounted: function() { 
+            const clickHandle = (tap) => {
+                this.onClick(tap)
+            }
+            document.addEventListener("lmEvent_NavgationBarEvent", clickHandle);
+        },
         created: function() {
-			
-			// if ( !this.leftText && !this.leftIcon && !this.leftsr ) {
-			// 	this.leftIcon = "back"
-			// }
-			
+            
             var _this = this;
+            
             if ( LMPUtils.inLmApp ) {
-				var reject = function() {}
-                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(_this.onClick, reject), location.href, {
+				var resolve = function() {}
+                plus.bridge.exec("LMNavigator", "setNavigationBarStyle", [plus.bridge.callbackId(resolve), location.href, {
                     
                     navstyle: "custom",
                     title: _this.title,
@@ -147,9 +150,9 @@
         },
         methods: {
             onClick(tap) {
-				if (tap && tap.index === 0) {
+				if (tap && tap.name === "left") {
 					this.onClickLeft()
-				} else if (tap && tap.index === 1) {
+				} else if (tap && tap.name === "right") {
 					this.onClickRight()
 				}
             },
