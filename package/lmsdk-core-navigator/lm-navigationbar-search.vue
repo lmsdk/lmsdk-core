@@ -68,7 +68,11 @@
 			shadow: {
 				type: String,
 				default: ''
-			}
+			},
+            focus: {
+                type: Boolean,
+                default: true
+            },
         },
         mounted: function() {
             const eventHandle = (event) => {
@@ -89,6 +93,7 @@
                     iconColor: _this.iconColor,
                     placeholder: _this.placeholder,
                     placeholderColor: _this.placeholderColor,
+                    focus: _this.focus,
                 }])
             }
         },

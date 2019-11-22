@@ -29,6 +29,7 @@
                     case navigator.types.Pop:  return navigator.pop(this.param).then()
                     case navigator.types.PopToRoot: return navigator.popToRoot().then()
                     case navigator.types.SetTabSelected: return navigator.setSelectedTabBarIndex(this.param).then()
+                    case navigator.types.PushNativePage: return navigator.pushNativePage(this.param).then()
                     default: return
                 }
             }

@@ -8,7 +8,12 @@ var LMPNavigator = function LMPNavigator() {
     }
 }
 
+LMPNavigator.prototype.pageNames = {
+    WalletManager: "WalletManager"
+}
+
 LMPNavigator.prototype.types = {
+    PushNativePage: "native",
     Push: "push",
     Pop: "pop",
     PopToRoot: "poptoroot",
@@ -50,6 +55,12 @@ LMPNavigator.prototype.setSelectedTabBarIndex = function(index) {
 LMPNavigator.prototype.selectedTarBarIndex = function() {
     return new Promise(function(resolve, reject) {
         plus.bridge.exec("LMNavigator", "selectedTarBarIndex", [plus.bridge.callbackId(resolve, reject)])
+    });
+}
+
+LMPNavigator.prototype.pushNativePage = function(pageName) {
+    return new Promise(function(resolve, reject) {
+        plus.bridge.exec("LMNavigator", "pushNativePage", [plus.bridge.callbackId(resolve, reject), pageName])
     });
 }
 
