@@ -13,11 +13,24 @@ LMPAssetsEthereum.prototype.getAssetsList = function() {
 }
 
 LMPAssetsEthereum.prototype.getAssetForKey = function(key) {
-    return new Promise(function(resolve, reject) {
-        if (LMPUtils.inLmApp) {
-            plus.bridge.exec("LMAssets", "getAssetForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum', key])
-        }
-    });
+    
+    if ( typeof key == 'string' ) {
+        
+       return new Promise(function(resolve, reject) {
+           if (LMPUtils.inLmApp) {
+               plus.bridge.exec("LMAssets", "getAssetForKey", [plus.bridge.callbackId(resolve, reject), 'ethereum', key])
+           }
+       });
+       
+    } else if ( typeof key == 'object' ) {
+        
+        return new Promise(function(resolve, reject) {
+            if (LMPUtils.inLmApp) {
+                plus.bridge.exec("LMAssets", "getAssetInfoByKeyList", [plus.bridge.callbackId(resolve, reject), 'ethereum', key])
+            }
+        });
+        
+    }
 }
 
 LMPAssetsEthereum.prototype.searchAssetsNameWithKeyword = function(keyword, limit) {
