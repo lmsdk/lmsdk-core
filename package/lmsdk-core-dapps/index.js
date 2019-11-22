@@ -8,16 +8,16 @@ var LMPDapps = function LMPDapps() {
 LMPDapps.prototype.openDappWithDappKey = function(key) {
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
-			var list = JSON.parse(localStorage.getItem("searchHistory"));
+			var list = JSON.parse(localStorage.getItem("recentlyUsed"));
 			if(list === null){list = []}
 			for (let k in list) {
 				if(list[k] === key){list.splice(k,1)}
 			}
 			list.unshift(key)
-			if(list.length>=6){
+			if(list.length>=5){
 				list.pop()
 			}
-			localStorage.setItem("searchHistory",JSON.stringify(list));
+			localStorage.setItem("recentlyUsed",JSON.stringify(list));
 			
             plus.bridge.exec("LMDapps", "openDappWithSchemas", [plus.bridge.callbackId(resolve, reject), "limowallet://limowallet.org/dapps/open?type=git&url=" + key])
         }
