@@ -5,7 +5,7 @@ var LMPDapps = function LMPDapps() {
     this.ethereum = new dapps_ethereum();
 }
 
-LMPDapps.prototype.openDappWithDappKey = function(key) {
+LMPDapps.prototype.openDappWithDappKey = function(key,callback) {
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
 			var list = JSON.parse(localStorage.getItem("recentlyUsed"));
@@ -18,6 +18,7 @@ LMPDapps.prototype.openDappWithDappKey = function(key) {
 				list.pop()
 			}
 			localStorage.setItem("recentlyUsed",JSON.stringify(list));
+			if(callback){callback()}
 			
             plus.bridge.exec("LMDapps", "openDappWithSchemas", [plus.bridge.callbackId(resolve, reject), "limowallet://limowallet.org/dapps/open?type=git&url=" + key])
         }
