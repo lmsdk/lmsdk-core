@@ -23,8 +23,10 @@ LMPDappsEthereum.prototype.getDappForKey = function(dappkey) {
 
 LMPDappsEthereum.prototype.searchDappsNameWithKeyword = function(keyword, limit) {
     if (!limit) {
-        limit = -1;
-    }
+        limit = "-1";
+    }else if(typeof(limit) == "number"){
+		limit = limit.toString()
+	}
     
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
@@ -35,8 +37,11 @@ LMPDappsEthereum.prototype.searchDappsNameWithKeyword = function(keyword, limit)
 
 LMPDappsEthereum.prototype.searchDappsInfoWithKeyword = function(keyword, limit) {
     if (!limit) {
-        limit = 20;
-    }
+        limit = "20";
+    }else if(typeof(limit) == "number"){
+		limit = limit.toString()
+	}
+	
     return new Promise(function(resolve, reject) {
         if (LMPUtils.inLmApp) {
             plus.bridge.exec("LMDapps", "searchDappsInfoWithKeyword", [plus.bridge.callbackId(resolve, reject), 'ethereum', keyword, limit])
